@@ -1,0 +1,47 @@
+.order-container {
+  background: #fff;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  margin: 20px auto;
+  max-width: 1000px;
+}
+
+.order-container h1 {
+  font-size: 22px;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.order-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.order-table th,
+.order-table td {
+  border: 1px solid #eee;
+  padding: 12px 16px;
+  text-align: left;
+  font-size: 14px;
+}
+
+.order-table th {
+  background: #f5f5f5;
+  font-weight: 600;
+}
+
+.order-table tr:hover {
+  background: #fafafa;
+}
+
+.order-table select {
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  cursor: pointer;
+}
+/* Order.css */
+.order-page {
+  padding: 20px;
+}

@@ -1,4 +1,4 @@
-const port = 4000;
+const port = process.env.PORT ||4000;
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
@@ -53,10 +53,7 @@ app.use("/images", express.static(path.join(__dirname, "upload", "images")));
 app.post("/upload", upload.single("image"), (req, res) => {
   try {
     if (!req.file) {
-      return res.status(400).json({
-        success: 0,
-        message: "No file uploaded",
-      });
+      return res.status(400).json({ success: 0, message: "No file uploaded" });
     }
 
     res.json({
@@ -85,8 +82,27 @@ const productSchema = new mongoose.Schema({
   available: { type: Boolean, default: true },
 });
 
-// Create model
 const Product = mongoose.model("Product", productSchema);
+
+// ------------------- ORDER SCHEMA -------------------
+const orderSchema = new mongoose.Schema({
+  userId: { type: String, required: true }, // Clerk userId or customer identifier
+  products: [
+    {
+      productId: { type: Number, required: true },
+      quantity: { type: Number, required: true, default: 1 },
+    },
+  ],
+  totalAmount: { type: Number, required: true },
+  status: {
+    type: String,
+    enum: ["pending", "processing", "shipped", "delivered", "cancelled"],
+    default: "pending",
+  },
+  date: { type: Date, default: Date.now },
+});
+
+const Order = mongoose.model("Order", orderSchema);
 
 // ------------------- PRODUCT ROUTES -------------------
 
@@ -94,49 +110,20 @@ const Product = mongoose.model("Product", productSchema);
 app.post("/addproduct", async (req, res) => {
   try {
     let products = await Product.find({});
-    let id;
-    if (products.length > 0) {
-      let last_product = products[products.length - 1];
-      id = last_product.id + 1;
-    } else {
-      id = 1;
-    }
-
-    console.log("Incoming product data:", req.body);
+    let id = products.length > 0 ? products[products.length - 1].id + 1 : 1;
 
     const { name, image, category, new_price, old_price } = req.body;
 
     if (!name || !image || !category || !new_price || !old_price) {
-      return res.status(400).json({
-        success: false,
-        message: "Missing required fields",
-      });
+      return res.status(400).json({ success: false, message: "Missing fields" });
     }
 
-    const product = new Product({
-      id,
-      name,
-      image,
-      category,
-      new_price,
-      old_price,
-    });
-
+    const product = new Product({ id, name, image, category, new_price, old_price });
     await product.save();
-    console.log("✅ Product saved successfully");
 
-    res.json({
-      success: true,
-      message: "Product saved successfully",
-      product,
-    });
+    res.json({ success: true, message: "Product saved successfully", product });
   } catch (err) {
-    console.error("❌ Error saving product:", err);
-    res.status(500).json({
-      success: false,
-      message: "Failed to save product",
-      error: err.message,
-    });
+    res.status(500).json({ success: false, message: "Failed to save product", error: err.message });
   }
 });
 
@@ -144,18 +131,9 @@ app.post("/addproduct", async (req, res) => {
 app.get("/allproducts", async (req, res) => {
   try {
     const products = await Product.find();
-    res.json({
-      success: true,
-      count: products.length,
-      products,
-    });
+    res.json({ success: true, count: products.length, products });
   } catch (err) {
-    console.error("❌ Error fetching products:", err);
-    res.status(500).json({
-      success: false,
-      message: "Failed to fetch products",
-      error: err.message,
-    });
+    res.status(500).json({ success: false, message: "Failed to fetch products", error: err.message });
   }
 });
 
@@ -165,56 +143,60 @@ app.delete("/deleteproduct/:id", async (req, res) => {
     const id = parseInt(req.params.id);
     const deleted = await Product.findOneAndDelete({ id });
 
-    if (!deleted) {
-      return res.status(404).json({
-        success: false,
-        message: "Product not found",
-      });
-    }
+    if (!deleted) return res.status(404).json({ success: false, message: "Product not found" });
 
-    res.json({
-      success: true,
-      message: "Product deleted successfully",
-      deleted,
-    });
+    res.json({ success: true, message: "Product deleted successfully", deleted });
   } catch (err) {
-    console.error("❌ Error deleting product:", err);
-    res.status(500).json({
-      success: false,
-      message: "Failed to delete product",
-      error: err.message,
-    });
+    res.status(500).json({ success: false, message: "Failed to delete product", error: err.message });
   }
 });
-
 
 // Update product
 app.put("/updateproduct/:id", async (req, res) => {
   try {
     const id = parseInt(req.params.id);
-    const updated = await Product.findOneAndUpdate({ id }, req.body, {
-      new: true,
-    });
+    const updated = await Product.findOneAndUpdate({ id }, req.body, { new: true });
 
-    if (!updated) {
-      return res.status(404).json({
-        success: false,
-        message: "Product not found",
-      });
-    }
+    if (!updated) return res.status(404).json({ success: false, message: "Product not found" });
 
-    res.json({
-      success: true,
-      message: "Product updated successfully",
-      updated,
-    });
+    res.json({ success: true, message: "Product updated successfully", updated });
   } catch (err) {
-    console.error("❌ Error updating product:", err);
-    res.status(500).json({
-      success: false,
-      message: "Failed to update product",
-      error: err.message,
-    });
+    res.status(500).json({ success: false, message: "Failed to update product", error: err.message });
+  }
+});
+
+// ------------------- ORDER ROUTES -------------------
+
+// Place order (customer)
+app.post("/order", async (req, res) => {
+  try {
+    const { userId, products, totalAmount } = req.body;
+    const order = new Order({ userId, products, totalAmount });
+    await order.save();
+    res.json({ success: true, message: "Order placed successfully", order });
+  } catch (err) {
+    res.status(500).json({ success: false, message: "Failed to place order", error: err.message });
+  }
+});
+
+// Get all orders (admin)
+app.get("/orders", async (req, res) => {
+  try {
+    const orders = await Order.find().sort({ date: -1 });
+    res.json({ success: true, orders });
+  } catch (err) {
+    res.status(500).json({ success: false, message: "Failed to fetch orders", error: err.message });
+  }
+});
+
+// Update order status (admin)
+app.put("/orders/:id", async (req, res) => {
+  try {
+    const updated = await Order.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    if (!updated) return res.status(404).json({ success: false, message: "Order not found" });
+    res.json({ success: true, message: "Order updated", updated });
+  } catch (err) {
+    res.status(500).json({ success: false, message: "Failed to update order", error: err.message });
   }
 });
 
