@@ -1,0 +1,109 @@
+.add-product {
+  background: #fff;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+  max-width: 900px;
+  margin: 20px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.form-title {
+  margin: 0 0 6px;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.status {
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+}
+.status-success { background: #ecfdf5; color: #065f46; border: 1px solid #a7f3d0; }
+.status-error   { background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }
+
+.addproduct-itemfield {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #334155;
+}
+
+.addproduct-itemfield input,
+.addproduct-itemfield select {
+  height: 42px;
+  padding: 0 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color .2s, box-shadow .2s;
+}
+
+.addproduct-itemfield input:focus,
+.addproduct-itemfield select:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59,130,246,.15);
+}
+
+.category-dropdown { background: #fff; cursor: pointer; }
+
+/* two-column for desktop, single column on mobile */
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+@media (max-width: 640px) {
+  .grid-2 { grid-template-columns: 1fr; }
+}
+
+.upload-box {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  border: 2px dashed #d1d5db;
+  border-radius: 12px;
+  padding: 12px;
+  cursor: pointer;
+  user-select: none;
+  max-width: 100%;
+}
+.upload-box:hover { border-color: #9ca3af; }
+
+.upload-box img {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+}
+.upload-hint {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.addproduct-submitbtn {
+  height: 44px;
+  padding: 0 16px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #fff;
+  background: #2563eb;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background .2s, transform .02s;
+  width: fit-content;
+}
+.addproduct-submitbtn:hover { background: #1d4ed8; }
+.addproduct-submitbtn:active { transform: translateY(1px); }
+.addproduct-submitbtn:disabled {
+  background: #93c5fd;
+  cursor: not-allowed;
+}

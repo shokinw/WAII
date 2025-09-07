@@ -1,0 +1,24 @@
+.app-container {
+  display: flex;
+  flex-direction: column; /* Navbar on top */
+  height: 100vh;
+}
+
+.main-layout {
+  display: flex;
+  flex: 1; /* take remaining space after navbar */
+}
+
+.sidebar {
+  width: 220px;
+  background: #f5f5f5;
+  padding: 20px;
+  border-right: 1px solid #ddd;
+}
+
+.content {
+  flex: 1;
+  padding: 20px;
+  background: #fff;
+  overflow-y: auto;
+}

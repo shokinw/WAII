@@ -1,0 +1,113 @@
+/* ListProduct.css */
+
+/* Page container */
+.list-product {
+  padding: 24px;
+  max-width: 1100px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  font-family: 'Inter', sans-serif;
+}
+
+/* Heading */
+.list-product h1 {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #222;
+  text-align: center;
+}
+
+/* Table header row */
+.listproduct-format-main {
+  display: grid;
+  grid-template-columns: 100px 1fr 120px 120px 120px 80px;
+  align-items: center;
+  padding: 12px 16px;
+  background: #f5f7fa;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 14px;
+  color: #333;
+}
+
+/* Each product row */
+.listproduct-format {
+  display: grid;
+  grid-template-columns: 100px 1fr 120px 120px 120px 80px;
+  align-items: center;
+  padding: 12px 16px;
+  margin: 10px 0;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  background: #fafafa;
+  transition: all 0.2s ease;
+}
+
+.listproduct-format:hover {
+  background: #f0f4f8;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+}
+
+/* Product image */
+.listproduct-product-icon {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+}
+
+/* Text styling */
+.listproduct-format p {
+  margin: 0;
+  font-size: 14px;
+  color: #444;
+}
+
+/* Price styling */
+.listproduct-format p:nth-child(3) {
+  text-decoration: line-through;
+  color: #999;
+}
+.listproduct-format p:nth-child(4) {
+  font-weight: 600;
+  color: #16a34a; /* green for discount */
+}
+
+/* Remove button */
+.listproduct-remove-icon {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.listproduct-remove-icon:hover {
+  transform: scale(1.2);
+  filter: brightness(0.8);
+}
+
+@media(max-width: 768px) {
+  .listproduct-format-main,
+  .listproduct-format {
+    grid-template-columns: 80px 1fr 100px 100px 100px 60px;
+    padding: 10px;
+  }
+
+  .listproduct-product-icon {
+    width: 50px;
+    height: 50px;
+  }
+
+  .listproduct-format p {
+    font-size: 12px;
+  }
+
+  .listproduct-remove-icon {
+    width: 20px;
+    height: 20px;
+  }
+}
