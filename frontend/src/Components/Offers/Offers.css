@@ -1,0 +1,76 @@
+.offers {
+  font-family: "Poppins", sans-serif;
+  padding: 100px 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.offers-title {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.offers-subtitle {
+  font-size: 14px;
+  color: #64748b; /* slate-500 */
+  max-width: 600px;
+  margin-bottom: 30px;
+}
+
+.offers-cards {
+  display: flex;
+  gap: 80px;
+  width: 100%;
+  max-width: 1200px;
+  height: 400px;
+}
+
+.offer-card {
+  position: relative;
+  flex-grow: 1;
+  width: 180px;
+  height: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.5s ease;
+}
+
+.offer-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.offer-card:hover {
+  flex-grow: 3; /* expand on hover */
+}
+
+.offer-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 20px;
+  color: white;
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.offer-card:hover .offer-overlay {
+  opacity: 1;
+}
+
+.offer-overlay h1 {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.offer-overlay p {
+  font-size: 0.9rem;
+  margin-top: 8px;
+}

@@ -1,0 +1,15 @@
+.full-photo {
+  width: 100vw;   /* full width of viewport */
+  height: 80vh;  /* full height of viewport */
+  display: flex;  
+  justify-content: center;  /* center horizontally */
+  align-items: center;      /* center vertically */
+  overflow: hidden;
+}
+
+.full-photo img {
+  width: 60%;
+  height: 60%;
+  object-fit: cover;
+}
+

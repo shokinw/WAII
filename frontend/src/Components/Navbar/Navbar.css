@@ -1,0 +1,387 @@
+.navbar {
+  width: 100%;
+  padding: 22px 5%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center; /* vertically centers everything */
+  position: fixed;
+  top: 0;
+  font-size: 25px;
+  color: silver;
+  background-image: linear-gradient(180deg, rgba(236, 228, 233, 0.7) 10%, transparent);
+  z-index: 100;
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 30px; /* reduced */
+}
+
+.navbar-left img {
+  width: 65px; /* smaller logo */
+}
+
+.navbar-left ul {
+  display: flex;
+  list-style: none;
+  gap: 15px; /* reduced */
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-left ul li {
+  cursor: pointer;
+}
+
+.navbar-left ul li hr {
+  border: none;
+  height: 2px;
+  background:  rgb(179, 25, 143);
+  margin-top: 2px;
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;  /* keep your icon spacing */
+  margin-left: 35%; /* pushes it right, but not too far */
+  max-width: 350px;  /* controls how far it spreads */
+}
+
+.navbar-right .icons {
+  width: 28px; /* slightly smaller */
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.navbar-right a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.navbar-right .icons:hover {
+  transform: scale(1.1);
+}
+
+.cart-link {
+  position: relative;
+  display: inline-block;
+}
+
+.cart-count {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background-color: #5e065b; /* Baby pink color */
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: bold;
+  animation: bounce 0.6s ease-in-out;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-5px);
+  }
+  60% {
+    transform: translateY(-3px);
+  }
+}
+
+.navbar-right p {
+  margin: 0;
+  font-size: 23px;
+  color: #ccc;
+}
+
+.login-btn {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+}
+
+.login-icon {
+  width: 99px; /* smaller login icon */
+  border-radius: 50%;
+}
+
+/* Responsive Design */
+/* Large Tablets and Small Laptops */
+@media (max-width: 1024px) {
+  .navbar {
+    padding: 20px 4%;
+    font-size: 22px;
+  }
+  
+  .navbar-left {
+    gap: 25px;
+  }
+  
+  .navbar-left img {
+    width: 60px;
+  }
+  
+  .navbar-left ul {
+    gap: 12px;
+  }
+  
+  .navbar-right {
+    margin-left: 30%;
+    gap: 12px;
+  }
+  
+  .navbar-right .icons {
+    width: 26px;
+  }
+  
+  .navbar-right p {
+    font-size: 20px;
+  }
+  
+  .login-icon {
+    width: 90px;
+  }
+}
+
+/* Tablets */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 18px 3%;
+    font-size: 20px;
+  }
+  
+  .navbar-left {
+    gap: 20px;
+  }
+  
+  .navbar-left img {
+    width: 55px;
+  }
+  
+  .navbar-left ul {
+    gap: 10px;
+    font-size: 18px;
+  }
+  
+  .navbar-right {
+    margin-left: 25%;
+    gap: 10px;
+    max-width: 300px;
+  }
+  
+  .navbar-right .icons {
+    width: 24px;
+  }
+  
+  .navbar-right p {
+    font-size: 18px;
+  }
+  
+  .login-icon {
+    width: 80px;
+  }
+  
+  .cart-count {
+    width: 18px;
+    height: 18px;
+    font-size: 11px;
+    top: -6px;
+    right: -6px;
+  }
+}
+
+/* Mobile Phones */
+@media (max-width: 480px) {
+  .navbar {
+    padding: 15px 2%;
+    font-size: 18px;
+  }
+  
+  .navbar-left {
+    gap: 15px;
+  }
+  
+  .navbar-left img {
+    width: 50px;
+  }
+  
+  .navbar-left ul {
+    gap: 8px;
+    font-size: 16px;
+  }
+  
+  .navbar-right {
+    margin-left: 20%;
+    gap: 8px;
+    max-width: 250px;
+  }
+  
+  .navbar-right .icons {
+    width: 22px;
+  }
+  
+  .navbar-right p {
+    font-size: 16px;
+  }
+  
+  .login-icon {
+    width: 70px;
+  }
+  
+  .cart-count {
+    width: 16px;
+    height: 16px;
+    font-size: 10px;
+    top: -5px;
+    right: -5px;
+  }
+}
+
+/* Small Mobile Phones */
+@media (max-width: 360px) {
+  .navbar {
+    padding: 12px 1%;
+    font-size: 16px;
+  }
+  
+  .navbar-left {
+    gap: 12px;
+  }
+  
+  .navbar-left img {
+    width: 45px;
+  }
+  
+  .navbar-left ul {
+    gap: 6px;
+    font-size: 14px;
+  }
+  
+  .navbar-right {
+    margin-left: 15%;
+    gap: 6px;
+    max-width: 200px;
+  }
+  
+  .navbar-right .icons {
+    width: 20px;
+  }
+  
+  .navbar-right p {
+    font-size: 14px;
+  }
+  
+  .login-icon {
+    width: 60px;
+  }
+  
+  .cart-count {
+    width: 14px;
+    height: 14px;
+    font-size: 9px;
+    top: -4px;
+    right: -4px;
+  }
+}
+
+/* Landscape Mobile */
+@media (max-height: 500px) and (orientation: landscape) {
+  .navbar {
+    padding: 10px 2%;
+  }
+  
+  .navbar-left img {
+    width: 40px;
+  }
+  
+  .navbar-left ul {
+    font-size: 14px;
+  }
+  
+  .navbar-right .icons {
+    width: 20px;
+  }
+  
+  .navbar-right p {
+    font-size: 14px;
+  }
+  
+  .login-icon {
+    width: 60px;
+  }
+}
+
+/* Touch Device Optimizations */
+@media (hover: none) and (pointer: coarse) {
+  .navbar-right .icons:hover {
+    transform: none;
+  }
+  
+  /* Increase touch targets */
+  .navbar-left ul li {
+    min-height: 44px;
+    min-width: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .navbar-right .icons {
+    min-height: 44px;
+    min-width: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .login-btn {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* High DPI Displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .navbar-left img,
+  .navbar-right .icons,
+  .login-icon {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+}
+
+/* Accessibility Improvements */
+@media (prefers-reduced-motion: reduce) {
+  .navbar-right .icons {
+    transition: none;
+  }
+  
+  .cart-count {
+    animation: none;
+  }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  .navbar {
+    background-image: linear-gradient(180deg, rgba(0,0,0,0.8) 10%, transparent);
+  }
+  
+  .navbar-right p {
+    color: #ddd;
+  }
+}
