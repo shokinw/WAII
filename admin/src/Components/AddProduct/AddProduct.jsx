@@ -32,7 +32,7 @@ const AddProduct = () => {
     formData.append("image", image);
 
     try {
-      let resp = await fetch("http://localhost:4000/upload", {
+      let resp = await fetch("https://wai-backend-jamo.onrender.com/upload", {
         method: "POST",
         body: formData,
       });
@@ -44,7 +44,7 @@ const AddProduct = () => {
         product.image = responseData.image_url;
         console.log("After upload, before save:", product);
 
-        let addResp = await fetch("http://localhost:4000/addproduct", {
+        let addResp = await fetch("https://wai-backend-jamo.onrender.com/addproduct", {
           method: "POST",
           headers: {
             Accept: "application/json",

@@ -10,7 +10,7 @@ const ListProduct = () => {
   const fetchInfo = async () => {
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:4000/allproducts");
+      const res = await fetch("https://wai-backend-jamo.onrender.com/allproducts");
       const data = await res.json();
       if (!res.ok || !data.success) throw new Error(data.message || "Failed to load products");
       setAllProducts(data.products || []);
@@ -26,7 +26,7 @@ const ListProduct = () => {
     if (!window.confirm("Are you sure you want to delete this product?")) return;
 
     try {
-      const res = await fetch(`http://localhost:4000/deleteproduct/${id}`, {
+      const res = await fetch(`https://wai-backend-jamo.onrender.com/deleteproduct/${id}`, {
         method: "DELETE",
       });
       const data = await res.json();
