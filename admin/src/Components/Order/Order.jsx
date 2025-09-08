@@ -6,7 +6,7 @@ const Order = () => {
 
   const fetchOrders = async () => {
     try {
-      const res = await fetch("http://localhost:4000/orders");
+      const res = await fetch("https://wai-backend-jamo.onrender.com/orders");
       const data = await res.json();
       if (data.success) setOrders(data.orders);
     } catch (err) {
@@ -16,7 +16,7 @@ const Order = () => {
 
   const updateStatus = async (id, status) => {
     try {
-      const res = await fetch(`http://localhost:4000/orders/${id}`, {
+      const res = await fetch(`https://wai-backend-jamo.onrender.com/orders/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ status }),

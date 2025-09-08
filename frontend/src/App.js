@@ -1,6 +1,7 @@
+import { useState } from "react"; // ✅ Import useState
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./Components/Navbar/Navbar";
-import Shop from "./Pages/Shop"; // <-- Import Shop
+import Shop from "./Pages/Shop";
 import ShopCategory from "./Pages/ShopCategory";
 import Product from "./Pages/Product";   
 import CartPage from "./Pages/CartPage";
@@ -9,21 +10,20 @@ import CheckoutPage from "./Pages/CheckoutPage";
 import Footer from "./Components/Footer/Footer";
 import Big from "./Components/Big/Big";
 import Admin from "./Pages/Admin";
-import { ClerkProvider } from '@clerk/clerk-react';
-
-const PUBLISHABLE_KEY = process.env.REACT_APP_CLERK_PUBLISHABLE_KEY;
-
-if (!PUBLISHABLE_KEY) {
-  throw new Error('Add your Clerk Publishable Key to the .env file');
-}
+import Login from "./Pages/Login"; // ✅ Import your login page
 
 function App() {
+  const [showLogin, setShowLogin] = useState(false);
+
   return (
-    <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
+    <>
+      {/* ✅ Conditionally show login popup */}
+      {showLogin && <Login onClose={() => setShowLogin(false)} />}
+
       <BrowserRouter>
         <Navbar />
         <Routes>
-          <Route path="/" element={<Shop />} />       {/* <-- Show Shop page at "/" */}
+          <Route path="/" element={<Shop />} />
           <Route path="/new" element={<ShopCategory category="new" />} />
           <Route path="/bestseller" element={<ShopCategory category="bestseller" />} />
           <Route path="/kurti" element={<ShopCategory category="kurti" />} />
@@ -33,11 +33,12 @@ function App() {
           <Route path="/search" element={<SearchPage />} />
           <Route path="/checkout" element={<CheckoutPage />} />
           <Route path="/admin" element={<Admin />} />
+          <Route path="/login" element={<Login />} /> {/* ✅ Login route */}
         </Routes>
-        <Big/>
+        <Big />
         <Footer />
       </BrowserRouter>
-    </ClerkProvider>
+    </>
   );
 }
 
