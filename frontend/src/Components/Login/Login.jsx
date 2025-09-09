@@ -1,63 +1,71 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Login.css";
+import logo from "../assets/logo.png"; // use your uploaded WAI logo here
 
 const Login = () => {
-  const [form, setForm] = useState({ email: "", password: "" });
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
-  const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    console.log("Login details:", form);
-    // Add login API call here
+
+    try {
+      const res = await fetch("http://localhost:4000/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await res.json();
+      if (!data.success) {
+        alert(data.message || "Login failed");
+        return;
+      }
+
+      // Save user + token
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("user", JSON.stringify(data.user));
+
+      navigate("/"); // redirect to home
+    } catch (err) {
+      console.error("Login error:", err);
+      alert("Something went wrong");
+    }
   };
 
   return (
     <div className="login-container">
       <div className="login-card">
-        <h2 className="login-title">Welcome Back 👋</h2>
+        <img src={logo} alt="WAI Logo" className="login-logo" />
+
+        <h2>Welcome Back</h2>
         <p className="login-subtitle">Login to continue shopping</p>
 
-        <form className="login-form" onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label>Email Address</label>
-            <input
-              type="email"
-              name="email"
-              placeholder="Enter your email"
-              value={form.email}
-              onChange={handleChange}
-              required
-            />
-          </div>
+        <form onSubmit={handleLogin}>
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
 
-          <div className="form-group">
-            <label>Password</label>
-            <input
-              type="password"
-              name="password"
-              placeholder="Enter your password"
-              value={form.password}
-              onChange={handleChange}
-              required
-            />
-          </div>
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
 
-          <button type="submit" className="login-btn">
-            Login
-          </button>
+          <button type="submit" className="login-btn">Login</button>
         </form>
 
-        <div className="login-footer">
-          <p>
-            Don’t have an account? <a href="/signup">Sign Up</a>
-          </p>
-          <a href="/forgot-password" className="forgot-link">
-            Forgot Password?
-          </a>
-        </div>
+        <p className="register-link">
+          Don’t have an account? <span onClick={() => navigate("/register")}>Register</span>
+        </p>
       </div>
     </div>
   );

@@ -1,96 +1,95 @@
-.popular {
+.section {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
-  min-height: auto;
-  margin-top: 30px; /* better than fixed height */
+  margin: 60px auto;
+  width: 100%;
+  overflow: hidden;
 }
 
-.popular h2 {
-  color: rgb(141, 139, 139);
-  font-size: 50px;
-  font-weight: 100;
+.section h2 {
+  color: #333;
+  font-size: 32px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
 }
 
-.popular hr {
-  width: 200px;
-  height: 6px;
-  border-radius: 10px;
-  background: purple;
+.section hr {
+  width: 120px;
+  height: 3px;
+  background: linear-gradient(135deg, #d997a2, #9c6ade);
+  border-radius: 2px;
+  margin: 10px 0 30px 0;
 }
 
-.popular-item {
-  margin-top: 20px;
+/* Horizontal Scroll Row */
+.scroll-row {
   display: flex;
-  gap: 30px;
+  gap: 20px;
   overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 10px;
+  width: 100%;
 }
 
-.popular-item::-webkit-scrollbar {
-  display: none;
+.scroll-row::-webkit-scrollbar {
+  height: 6px;
 }
 
-/* ---------- RESPONSIVE ---------- */
-
-@media (max-width: 1280px) {
-  .popular {
-    min-height: 70vh;
-  }
-  .popular h2 {
-    font-size: 40px;
-  }
-  .popular hr {
-    height: 4px;
-    width: 160px;
-  }
-  .popular-item {
-    gap: 20px;
-    margin-top: 30px;
-  }
+.scroll-row::-webkit-scrollbar-thumb {
+  background: #c7a4d4;
+  border-radius: 10px;
 }
 
+.scroll-row::-webkit-scrollbar-track {
+  background: #f3f3f3;
+  border-radius: 10px;
+}
+
+/* Item Card */
+.item {
+  flex: 0 0 auto;
+  width: 200px;
+  text-align: center;
+  border-radius: 12px;
+  padding: 12px;
+  background: #fff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  transition: transform 0.3s ease;
+}
+
+.item:hover {
+  transform: translateY(-5px);
+}
+
+.item img {
+  width: 100%;
+  height: 160px;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.item p {
+  margin-top: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #444;
+}
+
+/* ---------- Responsive ---------- */
 @media (max-width: 1024px) {
-  .popular {
-    min-height: 60vh;
-  }
-  .popular h2 {
-    font-size: 30px;
-  }
-  .popular hr {
-    height: 3px;
-    width: 120px;
-  }
-  .popular-item {
-    gap: 15px;
-    margin-top: 20px;
-  }
+  .roll h2 { font-size: 28px; }
+  .roll-item { width: 160px; }
 }
 
-@media (max-width: 800px) {
-  .popular {
-    min-height: 50vh;
-    gap: 6px;
-  }
-  .popular h2 {
-    font-size: 20px;
-  }
-  .popular hr {
-    width: 100px;
-  }
-  .popular-item {
-    gap: 10px;
-  }
+@media (max-width: 768px) {
+  .roll h2 { font-size: 24px; }
+  .roll-item { width: 140px; }
 }
 
 @media (max-width: 500px) {
-  .popular {
-    min-height: auto;
-    padding: 20px 0;
-  }
-  .popular-item {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-  }
+  .roll h2 { font-size: 20px; }
+  .roll-item { width: 120px; }
+  .roll-item img { height: 140px; }
 }

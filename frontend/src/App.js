@@ -10,8 +10,8 @@ import CheckoutPage from "./Pages/CheckoutPage";
 import Footer from "./Components/Footer/Footer";
 import Big from "./Components/Big/Big";
 import Admin from "./Pages/Admin";
-import Login from "./Pages/Login"; // ✅ Import your login page
-
+import Login from "./Components/Login/Login"; // ✅ Import your login page
+import Register from "./Components/Register/Register";
 function App() {
   const [showLogin, setShowLogin] = useState(false);
 
@@ -34,6 +34,7 @@ function App() {
           <Route path="/checkout" element={<CheckoutPage />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="/login" element={<Login />} /> {/* ✅ Login route */}
+          <Route path="/register" element={<Register />} /> {/* ✅ Register route */}
         </Routes>
         <Big />
         <Footer />

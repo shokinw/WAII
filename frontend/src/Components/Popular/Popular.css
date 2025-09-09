@@ -2,84 +2,119 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
-  margin-top: 30px;
-  height: auto;
+  margin: 60px auto;
+  width: 100%;
+  overflow: hidden;
 }
 
 .popular h2 {
-  color:  rgb(141, 139, 139);
-  font-size: 50px;
-  font-weight: 600;
+  color: #333;
+  font-size: 40px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
 }
 
 .popular hr {
-  width: 200px;
-  height: 6px;
-  border-radius: 10px;
-  background: purple;
+  width: 120px;
+  height: 4px;
+  background: linear-gradient(135deg, #d997a2, #9c6ade);
+  border-radius: 2px;
+  margin-top: 10px;
+  margin-bottom: 20px;
 }
 
-.popular-item {
+/* 🔥 Horizontal Scroll */
+.popular-scroll {
   display: flex;
   gap: 20px;
-  margin-top: 40px;
-  flex-wrap: wrap;         /* allow wrapping */
-  justify-content: center; /* center items */
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 10px;
+  width: 100%;
+}
+
+.popular-scroll::-webkit-scrollbar {
+  height: 8px;
+}
+
+.popular-scroll::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #d997a2, #9c6ade);
+  border-radius: 10px;
+}
+
+.popular-scroll::-webkit-scrollbar-track {
+  background: #f0f0f0;
+  border-radius: 10px;
 }
 
 .item {
-  width: 250px;           /* smaller size */
-  height: 250px;          /* fixed height */
-  border-radius: 10px;
+  flex: 0 0 auto;   /* ✅ prevent shrinking */
+  width: 220px;
+  height: 280px;
+  border-radius: 16px;
   overflow: hidden;
+  background: #fff;
+  padding: 12px;
   text-align: center;
-  background: #f9f9f9;    /* optional light bg */
-  padding: 10px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+  transition: all 0.3s ease-in-out;
 }
 
 .item img {
   width: 100%;
-  height: 100%;
-  object-fit: contain;    /* ✅ keeps full image visible */
+  height: 70%;
+  object-fit: contain;
+  transition: transform 0.3s ease-in-out;
+}
+
+.item:hover img {
+  transform: scale(1.08);
 }
 
 .item p {
-  margin-top: 6px;
-  font-size: 14px;
-  font-weight: 500;
+  margin-top: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #444;
 }
 
+.item-prices {
+  margin-top: 5px;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  font-size: 14px;
+}
+
+.item-price-new {
+  color: #9c6ade;
+  font-weight: bold;
+}
+
+.item-price-old {
+  color: #aaa;
+  text-decoration: line-through;
+}
 
 /* ---------- RESPONSIVE ---------- */
-
-@media (max-width: 1280px) {
-  .popular h2 { font-size: 40px; }
-  .popular hr { width: 160px; height: 4px; }
-  .product { width: 200px; }
-}
-
 @media (max-width: 1024px) {
-  .popular h2 { font-size: 30px; }
-  .popular hr { width: 120px; height: 3px; }
-  .product { width: 180px; }
+  .popular h2 { font-size: 32px; }
+  .item { width: 200px; height: 260px; }
 }
 
-@media (max-width: 800px) {
-  .popular h2 { font-size: 24px; }
-  .popular hr { width: 100px; }
-  .product { width: 45%; }
+@media (max-width: 768px) {
+  .popular h2 { font-size: 26px; }
+  .item { width: 180px; height: 240px; }
 }
 
 @media (max-width: 500px) {
-  .popular {
-    padding: 20px 0;
+  .popular-scroll {
+    gap: 15px;
+    padding-left: 15px;
   }
-  .popular-item {
-    flex-direction: column;
-    align-items: center;
-  }
-  .product {
-    width: 90%;
+  .item {
+    width: 160px;
+    height: 220px;
   }
 }
